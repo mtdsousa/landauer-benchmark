@@ -49,24 +49,24 @@ def check_rule(rule, collection_item):
 def apply_rules(collection, rules):
     return set(chain.from_iterable(filter(partial(check_rule, rule), collection) for rule in rules))
 
-def get_tree_data(tree, design_data, majority_support, overwrite):
+def get_aig(aig_path, source, majority_support, overwrite):
     start = timer()
-    if (overwrite or not tree.is_file()):
-        tree.parent.mkdir(parents = True, exist_ok = True)
-        tree_data = parse.parse(design_data, majority_support)
-        with tree.open('w') as f:
-            f.write(parse.serialize(tree_data))
-        return (tree_data, True, timer() - start)
+    if (overwrite or not aig_path.is_file()):
+        aig_path.parent.mkdir(parents = True, exist_ok = True)
+        aig = parse.parse(source, majority_support)
+        with aig_path.open('w') as f:
+            f.write(parse.serialize(aig))
+        return (aig, True, timer() - start)
     
-    with tree.open() as f:
-        tree_data = parse.deserialize(f.read())
-        return (tree_data, False, timer() - start)
+    with aig_path.open() as f:
+        aig = parse.deserialize(f.read())
+        return (aig, False, timer() - start)
 
-def generate_entropy_data(entropy_file, tree_data, overwrite, timeout):
+def generate_entropy_data(entropy_file, aig, overwrite, timeout):
     start = timer()
     if (overwrite or not entropy_file.is_file()):
         entropy_file.parent.mkdir(parents = True, exist_ok = True)
-        entropy_data = entropy.entropy(tree_data, timeout)
+        entropy_data = entropy.entropy(aig, timeout)
         with entropy_file.open('w') as f:
             f.write(entropy.serialize(entropy_data))
             return (True, timer() - start)
@@ -75,19 +75,19 @@ def generate_entropy_data(entropy_file, tree_data, overwrite, timeout):
 def run(working_directory, benchmark, benchmark_item, overwrite, timeout):
     logging.info(f"'{benchmark_item['name']}' from '{benchmark}': started")
     try:
-        design = path(working_directory, benchmark_item["files"]["design"])
-        assert design.is_file(), f"'{benchmark_item['name']}' from '{benchmark}': design not found"
-        with design.open() as f:
-            design_data = f.read()
+        source_path = path(working_directory, benchmark_item["files"]["source"])
+        assert source_path.is_file(), f"'{benchmark_item['name']}' from '{benchmark}': source not found"
+        with source_path.open() as f:
+            source = f.read()
 
-        tree = path(working_directory, benchmark_item["files"]["tree"])
-        tree_data, tree_overwritten, tree_time = get_tree_data(tree, design_data, benchmark_item["majority_support"], overwrite)
+        aig_path = path(working_directory, benchmark_item["files"]["aig"])
+        aig, aig_overwritten, aig_time = get_aig(aig_path, source, benchmark_item["majority_support"], overwrite)
 
         entropy_file = path(working_directory, benchmark_item["files"]["entropy"])
-        entropy_overwritten, entropy_time = generate_entropy_data(entropy_file, tree_data, overwrite or tree_overwritten, timeout)
+        entropy_overwritten, entropy_time = generate_entropy_data(entropy_file, aig, overwrite or aig_overwritten, timeout)
 
         logging.info(f"'{benchmark_item['name']}' from '{benchmark}': completed")
-        return (benchmark, benchmark_item['name'], tree_overwritten, tree_time, entropy_overwritten, entropy_time)
+        return (benchmark, benchmark_item['name'], aig_overwritten, aig_time, entropy_overwritten, entropy_time)
 
     except Exception as e:
         logging.error(f"'{benchmark_item['name']}' from '{benchmark}': failed: {e}")
@@ -128,7 +128,7 @@ def main():
     pool = multiprocessing.Pool(args.processes)
     result = pool.starmap(run, tasks)
 
-    df = pd.DataFrame(filter(None, result), columns=['benchmark', 'name', 'tree_overwritten', 'tree_time', 'entropy_overwritten', 'entropy_time'])
+    df = pd.DataFrame(filter(None, result), columns=['benchmark', 'name', 'aig_overwritten', 'aig_time', 'entropy_overwritten', 'entropy_time'])
     df.to_csv(args.output if args.output else sys.stdout)
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ This repository provides AIGs and entropy databases generated using [Landauer](h
 
 > You can print this list using `python list.py benchmarks.json --benchmarks`
 
-An AIG file (under `tree/`) is a JSON file that contains a NetworkX graph (in a adjacency-list format). In this directed graph: every node with two incoming edges is an AND gate; every node with three incoming edges is a majority gate; every node with no incoming edges is an input; every node with no outgoing edges is a output; and, finally, an edge can optionally have the boolean attribute `inverter` indicating if there is an inverter between its endpoints.
+An AIG file (under `aig/`) is a JSON file that contains a NetworkX graph (in a adjacency-list format). In this directed graph: every node with two incoming edges is an AND gate; every node with three incoming edges is a majority gate; every node with no incoming edges is an input; every node with no outgoing edges is a output; and, finally, an edge can optionally have the boolean attribute `inverter` indicating if there is an inverter between its endpoints.
 
 An entropy database (under `entropy/`) is also a JSON file. You should expect a list of objects, where each object contains a set of signals (`variables`) and the entropy value for this set.
 
@@ -37,7 +37,7 @@ In the case where the AIG file or the entropy database already exists, these fil
 
 This command prints a CSV file as output. For instance:
 
-||benchmark|name|tree_overwritten|tree_time|entropy_overwritten|entropy_time|
+||benchmark|name|aig_overwritten|aig_time|entropy_overwritten|entropy_time|
 |--|--|--|--|--|--|--|
 |0|epfl|cavlc|True|0.9125719409994417|True|0.704149786999551|
 |1|epfl|ctrl|True|0.18873125400023127|True|0.02720098500049062|

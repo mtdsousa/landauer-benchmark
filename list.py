@@ -36,15 +36,15 @@ import landauer.entropy as entropy
 def path(working_directory, filename):
     return pathlib.Path(filename) if pathlib.Path(filename).is_absolute() else working_directory / filename
 
-def read_tree(working_directory, benchmark_item):
-    tree = path(working_directory, benchmark_item['files']['tree'])
-    if not tree.is_file():
+def read_aig(working_directory, benchmark_item):
+    aig = path(working_directory, benchmark_item['files']['aig'])
+    if not aig.is_file():
         return None
-    with tree.open() as f:
+    with aig.open() as f:
         return parse.deserialize(f.read())
     
 def read_entropy_database(working_directory, benchmark_item):
-    entropy_file = path(working_directory, benchmark_item["files"]["entropy"])
+    entropy_file = path(working_directory, benchmark_item['files']['entropy'])
     if not entropy_file.is_file():
         return None
     with entropy_file.open() as f:
@@ -79,10 +79,10 @@ def main():
                     'outputs': None,
                     'gates': None}
             
-            tree = read_tree(working_directory, item)
-            if tree:
+            aig = read_aig(working_directory, item)
+            if aig:
                 entropy_database = read_entropy_database(working_directory, item)
-                row.update(summary.summary(tree, entropy_database))
+                row.update(summary.summary(aig, entropy_database))
             data.append(row)
 
     df = pandas.DataFrame.from_dict(data)
