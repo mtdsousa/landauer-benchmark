@@ -1,4 +1,4 @@
-,benchmark,name,majority_support,delay,loss,inputs,outputs,gates
+,benchmark,name,majority_support,depth,loss,inputs,outputs,gates
 0,bencgen,3-bit ripple-carry adder,False,10.0,25.89699375973561,7.0,4.0,27.0
 1,bencgen,4-bit ripple-carry adder,False,12.0,34.52932501298081,9.0,5.0,36.0
 2,bencgen,5-bit ripple-carry adder,False,14.0,43.161656266226,11.0,6.0,45.0

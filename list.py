@@ -73,7 +73,7 @@ def main():
             row = {'benchmark': benchmark['name'],
                     'name': item['name'],
                     'majority_support': item['majority_support'],
-                    'delay': None,
+                    'depth': None,
                     'loss': None,
                     'inputs': None,
                     'outputs': None,
