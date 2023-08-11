@@ -74,7 +74,7 @@ def main():
                     'name': item['name'],
                     'majority_support': item['majority_support'],
                     'depth': None,
-                    'loss': None,
+                    'entropy_losses': None,
                     'inputs': None,
                     'outputs': None,
                     'gates': None}
