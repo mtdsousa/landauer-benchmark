@@ -380,132 +380,6 @@
                     "aig": "aig/bencgen/c17_16.json",
                     "entropy": "entropy/bencgen/c17_16.json"
                 }
-            },
-            {
-                "name": "3-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_3.v",
-                    "aig": "aig/bencgen/maj_3.json",
-                    "entropy": "entropy/bencgen/maj_3.json"
-                }
-            },
-            {
-                "name": "4-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_4.v",
-                    "aig": "aig/bencgen/maj_4.json",
-                    "entropy": "entropy/bencgen/maj_4.json"
-                }
-            },
-            {
-                "name": "5-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_5.v",
-                    "aig": "aig/bencgen/maj_5.json",
-                    "entropy": "entropy/bencgen/maj_5.json"
-                }
-            },
-            {
-                "name": "6-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_6.v",
-                    "aig": "aig/bencgen/maj_6.json",
-                    "entropy": "entropy/bencgen/maj_6.json"
-                }
-            },
-            {
-                "name": "7-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_7.v",
-                    "aig": "aig/bencgen/maj_7.json",
-                    "entropy": "entropy/bencgen/maj_7.json"
-                }
-            },
-            {
-                "name": "8-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_8.v",
-                    "aig": "aig/bencgen/maj_8.json",
-                    "entropy": "entropy/bencgen/maj_8.json"
-                }
-            },
-            {
-                "name": "9-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_9.v",
-                    "aig": "aig/bencgen/maj_9.json",
-                    "entropy": "entropy/bencgen/maj_9.json"
-                }
-            },
-            {
-                "name": "10-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_10.v",
-                    "aig": "aig/bencgen/maj_10.json",
-                    "entropy": "entropy/bencgen/maj_10.json"
-                }
-            },
-            {
-                "name": "11-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_11.v",
-                    "aig": "aig/bencgen/maj_11.json",
-                    "entropy": "entropy/bencgen/maj_11.json"
-                }
-            },
-            {
-                "name": "12-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_12.v",
-                    "aig": "aig/bencgen/maj_12.json",
-                    "entropy": "entropy/bencgen/maj_12.json"
-                }
-            },
-            {
-                "name": "13-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_13.v",
-                    "aig": "aig/bencgen/maj_13.json",
-                    "entropy": "entropy/bencgen/maj_13.json"
-                }
-            },
-            {
-                "name": "14-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_14.v",
-                    "aig": "aig/bencgen/maj_14.json",
-                    "entropy": "entropy/bencgen/maj_14.json"
-                }
-            },
-            {
-                "name": "15-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_15.v",
-                    "aig": "aig/bencgen/maj_15.json",
-                    "entropy": "entropy/bencgen/maj_15.json"
-                }
-            },
-            {
-                "name": "16-bit majority ripple-carry adder",
-                "majority_support": true,
-                "files": {
-                    "source": "source/bencgen/maj_16.v",
-                    "aig": "aig/bencgen/maj_16.json",
-                    "entropy": "entropy/bencgen/maj_16.json"
-                }
             }
         ]
     },
@@ -892,6 +766,138 @@
                 }
             }
         ]
+    },
+    {
+        "name": "bencgen3",
+        "description": "J. N. C. Fiche et al., \"Energy reduction opportunities in Field-Coupled Nanocomputing Adders,\" 2020 33rd Symposium on Integrated Circuits and Systems source (SBCCI), Campinas, Brazil, 2020, pp. 1-6, https://doi.org/10.1109/SBCCI50935.2020.9189895",
+        "list": [
+            {
+                "name": "3-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_3.v",
+                    "aig": "aig/bencgen/majority/maj_3.json",
+                    "entropy": "entropy/bencgen/majority/maj_3.json"
+                }
+            },
+            {
+                "name": "4-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_4.v",
+                    "aig": "aig/bencgen/majority/maj_4.json",
+                    "entropy": "entropy/bencgen/majority/maj_4.json"
+                }
+            },
+            {
+                "name": "5-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_5.v",
+                    "aig": "aig/bencgen/majority/maj_5.json",
+                    "entropy": "entropy/bencgen/majority/maj_5.json"
+                }
+            },
+            {
+                "name": "6-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_6.v",
+                    "aig": "aig/bencgen/majority/maj_6.json",
+                    "entropy": "entropy/bencgen/majority/maj_6.json"
+                }
+            },
+            {
+                "name": "7-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_7.v",
+                    "aig": "aig/bencgen/majority/maj_7.json",
+                    "entropy": "entropy/bencgen/majority/maj_7.json"
+                }
+            },
+            {
+                "name": "8-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_8.v",
+                    "aig": "aig/bencgen/majority/maj_8.json",
+                    "entropy": "entropy/bencgen/majority/maj_8.json"
+                }
+            },
+            {
+                "name": "9-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_9.v",
+                    "aig": "aig/bencgen/majority/maj_9.json",
+                    "entropy": "entropy/bencgen/majority/maj_9.json"
+                }
+            },
+            {
+                "name": "10-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_10.v",
+                    "aig": "aig/bencgen/majority/maj_10.json",
+                    "entropy": "entropy/bencgen/majority/maj_10.json"
+                }
+            },
+            {
+                "name": "11-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_11.v",
+                    "aig": "aig/bencgen/majority/maj_11.json",
+                    "entropy": "entropy/bencgen/majority/maj_11.json"
+                }
+            },
+            {
+                "name": "12-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_12.v",
+                    "aig": "aig/bencgen/majority/maj_12.json",
+                    "entropy": "entropy/bencgen/majority/maj_12.json"
+                }
+            },
+            {
+                "name": "13-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_13.v",
+                    "aig": "aig/bencgen/majority/maj_13.json",
+                    "entropy": "entropy/bencgen/majority/maj_13.json"
+                }
+            },
+            {
+                "name": "14-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_14.v",
+                    "aig": "aig/bencgen/majority/maj_14.json",
+                    "entropy": "entropy/bencgen/majority/maj_14.json"
+                }
+            },
+            {
+                "name": "15-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_15.v",
+                    "aig": "aig/bencgen/majority/maj_15.json",
+                    "entropy": "entropy/bencgen/majority/maj_15.json"
+                }
+            },
+            {
+                "name": "16-bit majority ripple-carry adder",
+                "majority_support": true,
+                "files": {
+                    "source": "source/bencgen/majority/maj_16.v",
+                    "aig": "aig/bencgen/majority/maj_16.json",
+                    "entropy": "entropy/bencgen/majority/maj_16.json"
+                }
+            }
+	]
     },
     {
         "name": "epfl",

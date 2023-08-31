@@ -31,51 +31,51 @@
 29,bencgen,11-bit carry-lookahead block adder,True,0.14393939300043712,True,1708.4798470529995
 30,bencgen,12-bit carry-lookahead block adder,True,0.16023207400030515,True,7862.404890607
 31,bencgen,13-bit carry-lookahead block adder,True,0.17556775499906507,True,33662.089139384
-32,bencgen,3-bit majority ripple-carry adder,True,0.05521022999892011,True,0.003640354989329353
-33,bencgen,4-bit majority ripple-carry adder,True,0.05105573497712612,True,0.017793080012779683
-34,bencgen,5-bit majority ripple-carry adder,True,0.06341570700169541,True,0.0870834189991001
-35,bencgen,6-bit majority ripple-carry adder,True,0.10835229799977242,True,0.35940423900001406
-36,bencgen,7-bit majority ripple-carry adder,True,0.06575881099979597,True,1.468270178000239
-37,bencgen,8-bit majority ripple-carry adder,True,0.0893970460001583,True,6.689194886999758
-38,bencgen,9-bit majority ripple-carry adder,True,0.08048526800030231,True,34.664357272000416
-39,bencgen,10-bit majority ripple-carry adder,True,0.1258000269999684,True,169.87202886199975
-40,bencgen,11-bit majority ripple-carry adder,True,0.24094325400028538,True,783.4271095069998
-41,bencgen,12-bit majority ripple-carry adder,True,0.1585389940000823,True,3592.122654318
-42,bencgen,13-bit majority ripple-carry adder,True,0.16812314999970113,True,15594.466978923
-43,bencgen,14-bit majority ripple-carry adder,True,0.18407612300143228,True,72911.989045284
-44,bencgen2,3-bit ripple-carry adder,True,0.08268934198713396,True,0.005183885994483717
-45,bencgen2,4-bit ripple-carry adder,True,0.05613734701182693,True,0.022802138002589345
-46,bencgen2,5-bit ripple-carry adder,True,0.06622561300173402,True,0.10781776299700141
-47,bencgen2,6-bit ripple-carry adder,True,0.1154203129990492,True,0.5076237359899096
-48,bencgen2,7-bit ripple-carry adder,True,0.116277001999606,True,1.8657374159997744
-49,bencgen2,8-bit ripple-carry adder,True,0.08403287199962506,True,8.304374548999931
-50,bencgen2,9-bit ripple-carry adder,True,0.09165033599992967,True,47.21759577099965
-51,bencgen2,10-bit ripple-carry adder,True,0.13079690799986565,True,223.037345017
-52,bencgen2,11-bit ripple-carry adder,True,0.16282413299995824,True,1067.5309923029995
-53,bencgen2,12-bit ripple-carry adder,True,0.25022424200005844,True,4580.115445492
-54,bencgen2,13-bit ripple-carry adder,True,0.21814004100087914,True,20504.551503466
-55,bencgen2,3-bit carry-lookahead adder,True,0.0938351159998092,True,0.014281817999744817
-56,bencgen2,4-bit carry-lookahead adder,True,0.12408909599980689,True,0.02194647199985411
-57,bencgen2,5-bit carry-lookahead adder,True,0.06828392099987468,True,0.11599520499976279
-58,bencgen2,6-bit carry-lookahead adder,True,0.08401925099997243,True,0.6446010770000612
-59,bencgen2,7-bit carry-lookahead adder,True,0.10392203099991093,True,3.232066628999746
-60,bencgen2,8-bit carry-lookahead adder,True,0.26214125600017724,True,15.956427473000076
-61,bencgen2,9-bit carry-lookahead adder,True,0.1565938870003265,True,97.66468381599998
-62,bencgen2,10-bit carry-lookahead adder,True,0.21872389400004977,True,504.1375949999997
-63,bencgen2,11-bit carry-lookahead adder,True,0.2873007569996844,True,2425.091521565
-64,bencgen2,12-bit carry-lookahead adder,True,0.3681023249991995,True,11197.575524812
-65,bencgen2,13-bit carry-lookahead adder,True,0.39467554199973165,True,52766.041481684
-66,bencgen2,3-bit carry-lookahead block adder,True,0.04964596196077764,True,0.006171149027068168
-67,bencgen2,4-bit carry-lookahead block adder,True,0.13000409300002502,True,0.09855833299980077
-68,bencgen2,5-bit carry-lookahead block adder,True,0.0605828890002158,True,0.10141882599964447
-69,bencgen2,6-bit carry-lookahead block adder,True,0.07158638000009887,True,0.5181067070002427
-70,bencgen2,7-bit carry-lookahead block adder,True,0.10399676599990926,True,2.538548395000362
-71,bencgen2,8-bit carry-lookahead block adder,True,0.1235367330000372,True,12.084483938000176
-72,bencgen2,9-bit carry-lookahead block adder,True,0.24431273399977727,True,58.01085679500011
-73,bencgen2,10-bit carry-lookahead block adder,True,0.17420036499970593,True,300.19177809999974
-74,bencgen2,11-bit carry-lookahead block adder,True,0.18907783899976494,True,1435.126372443
-75,bencgen2,12-bit carry-lookahead block adder,True,0.20495417899928725,True,6480.045131889
-76,bencgen2,13-bit carry-lookahead block adder,True,0.20781250599975465,True,28096.990503092995
+32,bencgen2,3-bit ripple-carry adder,True,0.08268934198713396,True,0.005183885994483717
+33,bencgen2,4-bit ripple-carry adder,True,0.05613734701182693,True,0.022802138002589345
+34,bencgen2,5-bit ripple-carry adder,True,0.06622561300173402,True,0.10781776299700141
+35,bencgen2,6-bit ripple-carry adder,True,0.1154203129990492,True,0.5076237359899096
+36,bencgen2,7-bit ripple-carry adder,True,0.116277001999606,True,1.8657374159997744
+37,bencgen2,8-bit ripple-carry adder,True,0.08403287199962506,True,8.304374548999931
+38,bencgen2,9-bit ripple-carry adder,True,0.09165033599992967,True,47.21759577099965
+39,bencgen2,10-bit ripple-carry adder,True,0.13079690799986565,True,223.037345017
+40,bencgen2,11-bit ripple-carry adder,True,0.16282413299995824,True,1067.5309923029995
+41,bencgen2,12-bit ripple-carry adder,True,0.25022424200005844,True,4580.115445492
+42,bencgen2,13-bit ripple-carry adder,True,0.21814004100087914,True,20504.551503466
+43,bencgen2,3-bit carry-lookahead adder,True,0.0938351159998092,True,0.014281817999744817
+44,bencgen2,4-bit carry-lookahead adder,True,0.12408909599980689,True,0.02194647199985411
+45,bencgen2,5-bit carry-lookahead adder,True,0.06828392099987468,True,0.11599520499976279
+46,bencgen2,6-bit carry-lookahead adder,True,0.08401925099997243,True,0.6446010770000612
+47,bencgen2,7-bit carry-lookahead adder,True,0.10392203099991093,True,3.232066628999746
+48,bencgen2,8-bit carry-lookahead adder,True,0.26214125600017724,True,15.956427473000076
+49,bencgen2,9-bit carry-lookahead adder,True,0.1565938870003265,True,97.66468381599998
+50,bencgen2,10-bit carry-lookahead adder,True,0.21872389400004977,True,504.1375949999997
+51,bencgen2,11-bit carry-lookahead adder,True,0.2873007569996844,True,2425.091521565
+52,bencgen2,12-bit carry-lookahead adder,True,0.3681023249991995,True,11197.575524812
+53,bencgen2,13-bit carry-lookahead adder,True,0.39467554199973165,True,52766.041481684
+54,bencgen2,3-bit carry-lookahead block adder,True,0.04964596196077764,True,0.006171149027068168
+55,bencgen2,4-bit carry-lookahead block adder,True,0.13000409300002502,True,0.09855833299980077
+56,bencgen2,5-bit carry-lookahead block adder,True,0.0605828890002158,True,0.10141882599964447
+57,bencgen2,6-bit carry-lookahead block adder,True,0.07158638000009887,True,0.5181067070002427
+58,bencgen2,7-bit carry-lookahead block adder,True,0.10399676599990926,True,2.538548395000362
+59,bencgen2,8-bit carry-lookahead block adder,True,0.1235367330000372,True,12.084483938000176
+60,bencgen2,9-bit carry-lookahead block adder,True,0.24431273399977727,True,58.01085679500011
+61,bencgen2,10-bit carry-lookahead block adder,True,0.17420036499970593,True,300.19177809999974
+62,bencgen2,11-bit carry-lookahead block adder,True,0.18907783899976494,True,1435.126372443
+63,bencgen2,12-bit carry-lookahead block adder,True,0.20495417899928725,True,6480.045131889
+64,bencgen2,13-bit carry-lookahead block adder,True,0.20781250599975465,True,28096.990503092995
+65,bencgen3,3-bit majority ripple-carry adder,True,0.05521022999892011,True,0.003640354989329353
+66,bencgen3,4-bit majority ripple-carry adder,True,0.05105573497712612,True,0.017793080012779683
+67,bencgen3,5-bit majority ripple-carry adder,True,0.06341570700169541,True,0.0870834189991001
+68,bencgen3,6-bit majority ripple-carry adder,True,0.10835229799977242,True,0.35940423900001406
+69,bencgen3,7-bit majority ripple-carry adder,True,0.06575881099979597,True,1.468270178000239
+70,bencgen3,8-bit majority ripple-carry adder,True,0.0893970460001583,True,6.689194886999758
+71,bencgen3,9-bit majority ripple-carry adder,True,0.08048526800030231,True,34.664357272000416
+72,bencgen3,10-bit majority ripple-carry adder,True,0.1258000269999684,True,169.87202886199975
+73,bencgen3,11-bit majority ripple-carry adder,True,0.24094325400028538,True,783.4271095069998
+74,bencgen3,12-bit majority ripple-carry adder,True,0.1585389940000823,True,3592.122654318
+75,bencgen3,13-bit majority ripple-carry adder,True,0.16812314999970113,True,15594.466978923
+76,bencgen3,14-bit majority ripple-carry adder,True,0.18407612300143228,True,72911.989045284
 77,epfl,cavlc,True,0.8648149660002673,True,1.0989193970017368
 78,epfl,ctrl,True,0.22729211699333973,True,0.09252980700694025
 79,epfl,dec,True,0.45076645399967674,True,0.13354965900362004
