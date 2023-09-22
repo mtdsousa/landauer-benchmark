@@ -23,16 +23,14 @@ SOFTWARE.
 '''
 
 import argparse
-import json
+import csv
 import logging
 import multiprocessing
+import pathlib
 import sys
 
 import pandas as pd
 
-from functools import partial
-from itertools import chain
-from pathlib import Path
 from timeit import default_timer as timer
 
 import landauer.entropy as entropy
@@ -40,14 +38,7 @@ import landauer.evaluate as evaluate
 import landauer.parse as parse
 
 def path(working_directory, filename):
-    return Path(filename) if Path(filename).is_absolute() else working_directory / filename
-
-def check_rule(rule, collection_item):
-    benchmark_name, benchmark_item = collection_item
-    return benchmark_name == rule['benchmark'] and ('list' not in rule or len(rule['list']) == 0 or benchmark_item in set(rule['list']))
-
-def apply_rules(collection, rules):
-    return set(chain.from_iterable(filter(partial(check_rule, rule), collection) for rule in rules))
+    return pathlib.Path(filename) if pathlib.Path(filename).is_absolute() else working_directory / filename
 
 def get_aig(aig_path, source, majority_support, overwrite):
     start = timer()
@@ -72,58 +63,71 @@ def generate_entropy_data(entropy_file, aig, overwrite, timeout):
             return (True, timer() - start)
     return (False, timer() - start)
 
-def run(working_directory, benchmark, benchmark_item, overwrite, timeout):
-    logging.info(f"'{benchmark_item['name']}' from '{benchmark}': started")
+def run(working_directory, benchmark, name, majority_support, source, aig_path, entropy_path, overwrite, timeout):
+    logging.info(f"'{name}' from '{benchmark}': started")
     try:
-        source_path = path(working_directory, benchmark_item["files"]["source"])
-        assert source_path.is_file(), f"'{benchmark_item['name']}' from '{benchmark}': source not found"
+        source_path = path(working_directory, source)
+        assert source_path.is_file(), f"'{name}' from '{benchmark}': source not found"
         with source_path.open() as f:
             source = f.read()
 
-        aig_path = path(working_directory, benchmark_item["files"]["aig"])
-        aig, aig_overwritten, aig_time = get_aig(aig_path, source, benchmark_item["majority_support"], overwrite)
+        aig_absolute_path = path(working_directory, aig_path)
+        aig, aig_overwritten, aig_time = get_aig(aig_absolute_path, source, majority_support, overwrite)
 
-        entropy_file = path(working_directory, benchmark_item["files"]["entropy"])
-        entropy_overwritten, entropy_time = generate_entropy_data(entropy_file, aig, overwrite or aig_overwritten, timeout)
+        entropy_absolute_path = path(working_directory, entropy_path)
+        entropy_overwritten, entropy_time = generate_entropy_data(entropy_absolute_path, aig, overwrite or aig_overwritten, timeout)
 
-        logging.info(f"'{benchmark_item['name']}' from '{benchmark}': completed")
-        return (benchmark, benchmark_item['name'], aig_overwritten, aig_time, entropy_overwritten, entropy_time)
-
+        logging.info(f"'{name}' from '{benchmark}': completed")
+        return (benchmark, name, aig_overwritten, aig_time, entropy_overwritten, entropy_time)
+    
     except Exception as e:
-        logging.error(f"'{benchmark_item['name']}' from '{benchmark}': failed: {e}")
+        logging.error(f"'{name}' from '{benchmark}': failed: {e}")
         return None
+
+def target(accept, ignore, benchmark, name):
+    return (not accept or ((benchmark, '') in accept or (benchmark, name) in accept)) and (not ignore or ((benchmark, '') not in ignore and (benchmark, name) not in ignore))
+
+def read_filter(filter):
+    csvreader = csv.reader(filter)
+    next(csvreader) # skip header
+    return set(map(tuple, csvreader))
 
 def main():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('benchmarks', type = argparse.FileType('r'))
-    argparser.add_argument('--accept', type = argparse.FileType('r'))
-    argparser.add_argument('--ignore', type = argparse.FileType('r'))
-    argparser.add_argument('--processes', type = int, default = multiprocessing.cpu_count())
-    argparser.add_argument('--timeout', type = int, default = 0)
-    argparser.add_argument('--overwrite', action = 'store_true')
-    argparser.add_argument('--debug', action = 'store_true')
-    argparser.add_argument('--output', type = argparse.FileType('w'))
+    argparser.add_argument('benchmark_list', help='Benchmark list as CSV file', type=argparse.FileType('r'))
+    argparser.add_argument('--accept', type=argparse.FileType('r'))
+    argparser.add_argument('--ignore', type=argparse.FileType('r'))
+    argparser.add_argument('--processes', type=int, default=multiprocessing.cpu_count())
+    argparser.add_argument('--timeout', type=int, default=0)
+    argparser.add_argument('--overwrite', action='store_true')
+    argparser.add_argument('--dry-run', action='store_true')
+    argparser.add_argument('--debug', action='store_true')
+    argparser.add_argument('--output', type=argparse.FileType('w'))
     
     args = argparser.parse_args()
-    
     if args.debug:
         logging.basicConfig(level=logging.DEBUG)
 
-    benchmarks = json.loads(args.benchmarks.read())
-    collection = set((benchmark["name"], benchmark_item["name"]) for benchmark in benchmarks for benchmark_item in benchmark["list"])
-    
+    accept = None
     if args.accept != None:
-        rules = json.loads(args.accept.read())
-        collection = apply_rules(collection, rules)
+        accept = read_filter(args.accept)
 
+    ignore = None
     if args.ignore != None:
-        rules = json.loads(args.ignore.read())
-        collection -= apply_rules(collection, rules)
+        ignore = read_filter(args.ignore)
 
-    working_directory = Path(args.benchmarks.name).parent.resolve()
+    working_directory = pathlib.Path(args.benchmark_list.name).parent.resolve()
+    csvreader = csv.reader(args.benchmark_list)
+    next(csvreader) # skip header
+    tasks = list((working_directory, benchmark, name, majority_support, source, aig_path, entropy_path, args.overwrite, args.timeout)
+        for benchmark, name, majority_support, source, aig_path, entropy_path in csvreader if target(accept, ignore, benchmark, name))
 
-    tasks = [(working_directory, benchmark["name"], benchmark_item, args.overwrite, args.timeout) \
-        for benchmark in benchmarks for benchmark_item in benchmark["list"] if (benchmark["name"], benchmark_item["name"]) in collection]
+    if args.dry_run:
+        csvwriter = csv.writer(sys.stdout)
+        csvwriter.writerow(['working_directory', 'benchmark', 'name', 'majority_support', 'source', 'aig_path', 'entropy_path', 'overwrite', 'timeout'])
+        for task in tasks:
+            csvwriter.writerow(task)
+        return
 
     pool = multiprocessing.Pool(args.processes)
     result = pool.starmap(run, tasks)

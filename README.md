@@ -1,6 +1,6 @@
 # Landauer Benchmark
 
-This repository provides AIGs and entropy databases generated using [Landauer](https://github.com/mtdsousa/landauer) for the benchmarks listed below:
+This repository provides AIGs and entropy databases generated from different benchmarks (listed below).
 
 | Benchmark | Description | Reference |
 | -- | -- | -- |
@@ -11,30 +11,33 @@ This repository provides AIGs and entropy databases generated using [Landauer](h
 | epfl2 | Benchmark adapted from `epfl`, synthesized as MIG | E. Testa et al., "Inverter propagation and fan-out constraints for beyond-CMOS Majority-based technologies," in Proc. IEEE Comput. Soc. Annu. Symp. VLSI, Jul. 2017, pp. 164–169. https://doi.org/10.1109/ISVLSI.2017.37 |
 | mcnc | MCNC benchmark | S. Yang, "Logic Synthesis and Optimization Benchmarks," Technical Report, MCNC, Dec. 1988, published at 1989 MCNC International Workshop on Logic Synthesis. |
 
-> You can print this list using `python list.py benchmarks.json --benchmarks`
+The benchmark items are listed in [benchmark_list.csv](benchmark_list.csv). There are metrics from these benchmarks (such as number of inputs, gates and entropy losses) available in [benchmark_metrics.csv](benchmark_metrics.csv).
+
+## AIG and Entropy Database
 
 An AIG file (under `aig/`) is a JSON file that contains a NetworkX graph (in a adjacency-list format). In this directed graph: every node with two incoming edges is an AND gate; every node with three incoming edges is a majority gate; every node with no incoming edges is an input; every node with no outgoing edges is a output; and, finally, an edge can optionally have the boolean attribute `inverter` indicating if there is an inverter between its endpoints.
 
 An entropy database (under `entropy/`) is also a JSON file. You should expect a list of objects, where each object contains a set of signals (`variables`) and the entropy value for this set.
 
-## List
-
-There is a [list](benchmarks.csv) with what you may find in this repository.
-> You can generate this list using `python list.py benchmarks.json`
-
 ## Generating
 
 If you would like to generate these benchmark files, you should run the command below:
+
 ```bash
-python benchmark.py benchmarks.json --overwrite --debug
+python benchmark.py benchmark_list.csv --overwrite --debug
 ```
-In the case where the AIG file or the entropy database already exists, these files will be overwritten unless `--overwrite` is supressed. For each task started, completed or failed, a message will be printed on `stderr` unless `--debug` is supressed.
+
+> [Landauer](https://github.com/mtdsousa/landauer) (a Python package) is required.
+
+- In the case where the AIG file or the entropy database already exists, these files will be overwritten unless `--overwrite` is supressed.
+
+- For each task started, completed or failed, a message will be printed on `stderr` unless `--debug` is supressed.
 
 - Some entropy databases may take hours to be generated. There is an optional switch (`--timeout`) to set a limit for each database (in seconds).
 
 - Multiple benchmark files can be generated at the same time. There is an optional switch (`--processes`) to set the number of processes. The default is the number of cores.
 
-- It is possible to select what you want to generate. For instance, to generate only small benchmarks (up to 10 inputs), except the ones from `bencgen`, one could use `--accept filters/small.json` and `--ignore filters/bencgen.json`.
+- It is possible to select what you want to generate. For instance, to generate only small benchmarks (up to 10 inputs), except the ones from `bencgen`, one could use `--accept filters/small.csv` and `--ignore filters/bencgen.csv`. If you would like to just test the filters, you can use the switch `--dry-run` to skip the generation process.
 
 This command prints a CSV file as output. For instance:
 

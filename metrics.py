@@ -23,9 +23,7 @@ SOFTWARE.
 '''
 
 import argparse
-import json
-import logging
-import pandas
+import csv
 import pathlib
 import sys
 
@@ -36,15 +34,15 @@ import landauer.entropy as entropy
 def path(working_directory, filename):
     return pathlib.Path(filename) if pathlib.Path(filename).is_absolute() else working_directory / filename
 
-def read_aig(working_directory, benchmark_item):
-    aig = path(working_directory, benchmark_item['files']['aig'])
+def read_aig(working_directory, aig_file):
+    aig = path(working_directory, aig_file)
     if not aig.is_file():
         return None
     with aig.open() as f:
         return parse.deserialize(f.read())
     
-def read_entropy_database(working_directory, benchmark_item):
-    entropy_file = path(working_directory, benchmark_item['files']['entropy'])
+def read_entropy_database(working_directory, entropy_database_file):
+    entropy_file = path(working_directory, entropy_database_file)
     if not entropy_file.is_file():
         return None
     with entropy_file.open() as f:
@@ -52,41 +50,25 @@ def read_entropy_database(working_directory, benchmark_item):
 
 def main():
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('benchmarks', type = argparse.FileType('r'))
-    argparser.add_argument('--benchmarks', dest='list_benchmarks', action = 'store_true')
-    argparser.add_argument('--output', type = argparse.FileType('w'))
-
+    argparser.add_argument('benchmark_list', help='Benchmark list as CSV file', type=argparse.FileType('r'))
+    argparser.add_argument('--output', type=argparse.FileType('w'))
     args = argparser.parse_args()
     
-    benchmarks = json.loads(args.benchmarks.read())
-    
-    if args.list_benchmarks:
-        data = [{'name': benchmark['name'], 'description': benchmark['description']} for benchmark in benchmarks]
-        df = pandas.DataFrame.from_dict(data)
-        df.to_csv(args.output if args.output else sys.stdout)
-        return
-    
-    working_directory = pathlib.Path(args.benchmarks.name).parent.resolve()
-    data = list()
-    for benchmark in benchmarks:
-        for item in benchmark['list']:
-            row = {'benchmark': benchmark['name'],
-                    'name': item['name'],
-                    'majority_support': item['majority_support'],
-                    'depth': None,
-                    'entropy_losses': None,
-                    'inputs': None,
-                    'outputs': None,
-                    'gates': None}
-            
-            aig = read_aig(working_directory, item)
-            if aig:
-                entropy_database = read_entropy_database(working_directory, item)
-                row.update(summary.summary(aig, entropy_database))
-            data.append(row)
+    working_directory = pathlib.Path(args.benchmark_list.name).parent.resolve()
+    csvreader = csv.reader(args.benchmark_list)
+    next(csvreader) # skip header
+    csvwriter = csv.writer(args.output if args.output else sys.stdout)
 
-    df = pandas.DataFrame.from_dict(data)
-    df.to_csv(args.output if args.output else sys.stdout)
+    csvwriter.writerow(['benchmark', 'name', 'depth', 'entropy_losses', 'inputs', 'outputs', 'gates'])
+    for benchmark, name, majority_support, source, aig_file, entropy_file in csvreader:
+        aig = read_aig(working_directory, aig_file)
+        if aig:
+            entropy_database = read_entropy_database(working_directory, entropy_file)
+            s = summary.summary(aig, entropy_database)
+            csvwriter.writerow([benchmark, name, s['depth'], s['entropy_losses'], s['inputs'], s['outputs'], s['gates']])
+            continue
+
+        csvwriter.writerow([benchmark, name, None, None, None, None, None])
 
 if __name__ == '__main__':
     main()

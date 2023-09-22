@@ -1,0 +1,96 @@
+benchmark,name
+bencgen,3-bit carry-lookahead adder
+bencgen,3-bit carry-lookahead block adder
+bencgen,3-bit majority ripple-carry adder
+bencgen,3-bit ripple-carry adder
+bencgen,4-bit carry-lookahead block adder
+bencgen,4-bit majority ripple-carry adder
+bencgen,4-bit ripple-carry adder
+bencgen2,3-bit carry-lookahead adder
+bencgen2,3-bit carry-lookahead block adder
+bencgen2,3-bit majority ripple-carry adder
+bencgen2,3-bit ripple-carry adder
+bencgen2,4-bit carry-lookahead block adder
+bencgen2,4-bit majority ripple-carry adder
+bencgen2,4-bit ripple-carry adder
+epfl,cavlc
+epfl,ctrl
+epfl,dec
+epfl2,ctrl
+epfl2,dec
+mcnc,5xp1
+mcnc,9sym
+mcnc,9symml
+mcnc,alu2
+mcnc,alu3
+mcnc,apex4
+mcnc,apla
+mcnc,b1
+mcnc,b11
+mcnc,b7
+mcnc,bw
+mcnc,C17
+mcnc,clip
+mcnc,cm138a
+mcnc,cm42a
+mcnc,cm82a
+mcnc,con1
+mcnc,dc1
+mcnc,dc2
+mcnc,decod
+mcnc,dekoder
+mcnc,dist
+mcnc,dk17
+mcnc,dk27
+mcnc,ex1010
+mcnc,ex5
+mcnc,exp
+mcnc,exps
+mcnc,f51m
+mcnc,inc
+mcnc,lin
+mcnc,luc
+mcnc,m1
+mcnc,m2
+mcnc,m3
+mcnc,m4
+mcnc,majority
+mcnc,max1024
+mcnc,max128
+mcnc,max46
+mcnc,max512
+mcnc,misex1
+mcnc,mlp4
+mcnc,newapla2
+mcnc,newbyte
+mcnc,newcpla1
+mcnc,newcpla2
+mcnc,newcwp
+mcnc,newill
+mcnc,newtag
+mcnc,newtpla1
+mcnc,newtpla2
+mcnc,newxcpla1
+mcnc,p82
+mcnc,pope
+mcnc,prom1
+mcnc,prom2
+mcnc,rd53
+mcnc,rd73
+mcnc,rd84
+mcnc,risc
+mcnc,root
+mcnc,sao2
+mcnc,sex
+mcnc,sqn
+mcnc,sqr6
+mcnc,sqrt8
+mcnc,squar5
+mcnc,t
+mcnc,tms
+mcnc,wim
+mcnc,x2
+mcnc,xor5
+mcnc,z4ml
+mcnc,Z5xp1
+mcnc,Z9sym
