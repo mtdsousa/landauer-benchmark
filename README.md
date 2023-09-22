@@ -11,7 +11,7 @@ This repository provides AIGs and entropy databases generated from different ben
 | epfl2 | Benchmark adapted from `epfl`, synthesized as MIG | E. Testa et al., "Inverter propagation and fan-out constraints for beyond-CMOS Majority-based technologies," in Proc. IEEE Comput. Soc. Annu. Symp. VLSI, Jul. 2017, pp. 164–169. https://doi.org/10.1109/ISVLSI.2017.37 |
 | mcnc | MCNC benchmark | S. Yang, "Logic Synthesis and Optimization Benchmarks," Technical Report, MCNC, Dec. 1988, published at 1989 MCNC International Workshop on Logic Synthesis. |
 
-The benchmark items are listed in [benchmark_list.csv](benchmark_list.csv). There are metrics from these benchmarks (such as number of inputs, gates and entropy losses) available in [benchmark_metrics.csv](benchmark_metrics.csv).
+The benchmark items are listed in [benchmark_list.csv](benchmark_list.csv). There are metrics for these benchmarks (such as number of inputs, gates and entropy losses) available in [benchmark_metrics.csv](benchmark_metrics.csv).
 
 ## AIG and Entropy Database
 
