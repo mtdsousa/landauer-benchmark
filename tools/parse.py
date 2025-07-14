@@ -31,7 +31,7 @@ from pathlib import Path
 from landauer import parse, summary
 
 csvwriter = csv.writer(sys.stdout)
-csvwriter.writerow(["benchmark", "design", "inputs", "outputs", "gates", "time"])
+csvwriter.writerow(["benchmark", "design", "inputs", "outputs", "gates"])
 
 current_path = Path(os.path.dirname(os.path.realpath(__file__)))
 benchmark_path = current_path / ".." / "benchmark"
