@@ -23,10 +23,8 @@ SOFTWARE.
 """
 
 import csv
-import logging
 import os
 import sys
-import timeit
 
 from pathlib import Path
 
@@ -38,23 +36,18 @@ csvwriter.writerow(["benchmark", "design", "inputs", "outputs", "gates", "time"]
 current_path = Path(os.path.dirname(os.path.realpath(__file__)))
 benchmark_path = current_path / ".." / "benchmark"
 
-logging.basicConfig(level=logging.INFO)
-
 for root, dirs, files in os.walk(benchmark_path):
     for filename in sorted(files):
         if not filename.endswith(".v"):
             continue
-
-        design_name = filename.removesuffix(".v")
-        logging.info("Processing %s", design_name)
         
         benchmark_name = Path(root).name
         majority_support = benchmark_name.endswith("-majority")
         
         input_path = Path(root) / filename
+        design_name = filename.removesuffix(".v")
         with open(input_path, "r") as f:
             design = f.read()
-            start = timeit.timeit()
             aig = parse.parse(design, majority_support=majority_support)
             data = summary.summary(aig)
             csvwriter.writerow([
@@ -62,8 +55,7 @@ for root, dirs, files in os.walk(benchmark_path):
                 design_name,
                 data["inputs"],
                 data["outputs"],
-                data["gates"],
-                timeit.timeit() - start
+                data["gates"]
             ])
             sys.stdout.flush()
 
